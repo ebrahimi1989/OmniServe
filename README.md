@@ -25,9 +25,9 @@ Install dependencies:
 
 bash
 Copy code
-# Install Qt
-# Install Drogon
-# Install gRPC
+### Install Qt
+### Install Drogon
+### Install gRPC
 Build the project:
 
 bash
