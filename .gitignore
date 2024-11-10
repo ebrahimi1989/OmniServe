@@ -1,0 +1,57 @@
+# Build directories
+/build
+/out
+/cmake-build-*
+/build-*
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+CMakeLists.txt.user
+
+# vcpkg
+/vcpkg
+
+# Qt related
+*.pro.user
+*.pro.user.*
+.qt
+*.qmake.stash
+
+# gRPC and other external dependencies
+/_deps
+
+# Logs
+*.log
+*.out
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated files
+*.swp
+*.bak
+*.tmp
+
+# Docker files
+Dockerfile
+*.dockerfile
+
+# GitHub Actions
+.github/workflows/*.yml
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+*.iml
+
+# Ignore package managers' files
+node_modules/
+npm-debug.log
+yarn.lock
+package-lock.json
+
+# Other system files
+*.sublime-workspace
+*.sublime-project

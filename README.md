@@ -1,45 +1,31 @@
 ## OmniServe
-OmniServe is a versatile, high-performance C++ server framework designed to handle complex data operations. Built with Qt, Drogon, and gRPC, it provides a reliable, secure, and scalable solution for managing, distributing, and processing data across various services.
 
-Features
-Comprehensive Data Management: OmniServe is designed to handle a wide range of data tasks, from distribution to real-time processing and service interaction.
-Service-to-Server API Calls: Allows external services to interact with the server, requesting data and triggering operations.
-Authorization & Authentication: Supports secure data exchange with integrated authentication mechanisms.
-ORM Support: Includes ORM features to connect with different databases efficiently.
-Frontend Rendering: OmniServe can render HTML-based frontends, making it easy to integrate with web-based UIs.
-gRPC and JSON Support: Uses gRPC for fast data encoding/decoding and seamless JSON conversion, optimizing data handling.
-Getting Started
-Prerequisites
-C++ Compiler: Compatible with C++17 or later.
-Qt Framework: Version 5.15 or above.
-Drogon Framework: C++ framework for asynchronous HTTP applications.
-gRPC: For high-performance RPC connections.
-Installation
-Clone the repository:
+OmniServe is a versatile, high-performance C++ server framework designed to handle complex data operations. Built with Qt, Drogon, and gRPC, it provides a reliable, secure, and scalable solution for managing, distributing, and processing data across various services. OmniServe supports bidirectional communication, allowing clients and servers to exchange data efficiently in real-time using DTOs.
 
-bash
-Copy code
-git clone https://github.com/yourusername/OmniServe.git
-cd OmniServe
-Install dependencies:
+### Features
+- **Comprehensive Data Management**: OmniServe handles a wide range of data tasks, including distribution, real-time processing, and service interactions.
+- **Service-to-Server API Calls**: External services can interact with the server, requesting data and triggering operations via gRPC.
+- **Bidirectional gRPC Communication**: Facilitates efficient communication between the server and clients across various platforms and languages supporting gRPC.
+- **Authorization & Authentication**: Ensures secure data exchange and integrates authentication mechanisms for safe interactions.
+- **Role-Based Access Control (RBAC)**: Allows fine-grained access control to restrict resources based on roles.
+- **ORM Support**: OmniServe supports ORM features for efficient database connections and management.
+- **Frontend Rendering**: Supports rendering of HTML-based frontends for integration with web-based UIs.
+- **gRPC and JSON Support**: Uses gRPC for high-performance data encoding/decoding, and also supports seamless JSON conversion for compatibility with different clients.
+- **Enhanced Logging and Monitoring**: Provides robust logging and monitoring capabilities to track system performance and errors.
+- **Encryption and Secure Data Transfer**: Ensures all communications are encrypted, safeguarding data in transit.
 
-bash
-Copy code
-### Install Qt
-### Install Drogon
-### Install gRPC
-Build the project:
+### Getting Started
+#### Prerequisites
+To start building and running OmniServe, you'll need to have the following tools installed:
+- **C++ Compiler**: Ensure compatibility with C++17 or later.
+- **Qt Framework**: Version 5.15 or above.
+- **Drogon Framework**: A C++ framework for building asynchronous HTTP applications.
+- **gRPC**: For high-performance RPC connections and bidirectional communication.
+- **vcpkg** (Package Manager): Recommended for managing dependencies and libraries.
 
-bash
-Copy code
-mkdir build && cd build
-cmake ..
-make
-Usage
-Run the OmniServe server:
-
-bash
-Copy code
-./build/OmniServe
-Configuration
-OmniServe provides a configuration file for customizing server behavior, database connections, and service API settings. Edit config.json to set your preferences.
+#### Installation
+To get started with OmniServe, follow these steps:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/OmniServe.git
+   cd OmniServe
