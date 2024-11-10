@@ -1,0 +1,38 @@
+name: CI/CD for OmniServe
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Docker
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Build the Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t omniserve .
+
+      # Run the Docker container to test if it works
+      - name: Run OmniServe container
+        run: |
+          docker run -d -p 8080:8080 omniserve
+          sleep 10
+          curl http://localhost:8080  # Test if the server is running
+
+      # Run tests (if any)
+      - name: Run tests
+        run: |
+          docker exec omniserve ./build/tests/test_main
