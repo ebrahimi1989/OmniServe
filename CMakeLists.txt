@@ -1,67 +1,55 @@
 cmake_minimum_required(VERSION 3.15)
 
-# Define the project
+# تعریف پروژه
 project(OmniServe VERSION 1.0 LANGUAGES CXX)
 
-# Set the C++ standard
+# تنظیم استاندارد C++
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Log the start of the configuration
+# استفاده از فایل ابزار vcpkg برای مدیریت وابستگی‌ها
+if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+    set(CMAKE_TOOLCHAIN_FILE "/projects/libarary/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
+endif()
+
+# تنظیم CMAKE_PREFIX_PATH برای کمک به پیدا کردن کتابخانه‌ها در vcpkg
+set(CMAKE_PREFIX_PATH "/projects/libarary/vcpkg/installed/x64-linux" ${CMAKE_PREFIX_PATH})
+
+# شروع پیکربندی پروژه
 message(STATUS "Starting project configuration...")
 
-# Enable verbose output for better logging
+# فعال‌سازی خروجی verbose برای اشکال‌زدایی بهتر
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-# Set the path where external dependencies will be downloaded
-set(FETCH_CONTENT_QUIET FALSE)
+# پیدا کردن پکیج‌ها و کتابخانه‌های مورد نیاز
+find_package(Drogon CONFIG REQUIRED)
+find_package(gRPC CONFIG REQUIRED)
+find_package(protobuf CONFIG REQUIRED)
+find_package(jsoncpp CONFIG REQUIRED)
 
-# Include FetchContent module for downloading dependencies
-include(FetchContent)
+# پیدا کردن کتابخانه UUID
+find_library(UUID_LIB NAMES uuid REQUIRED PATHS /usr/lib/x86_64-linux-gnu)
 
-# --- Fetch Drogon ---
-message(STATUS "Fetching Drogon...")
-FetchContent_Declare(
-  Drogon
-  GIT_REPOSITORY https://github.com/drogonframework/drogon.git
-  GIT_TAG master
-)
-FetchContent_MakeAvailable(Drogon)
+if (UUID_LIB)
+  message(STATUS "UUID library found at: ${UUID_LIB}")
+else()
+  message(FATAL_ERROR "UUID library not found. Make sure it is installed and available.")
+endif()
 
-# --- Fetch gRPC ---
-message(STATUS "Fetching gRPC...")
-FetchContent_Declare(
-  gRPC
-  GIT_REPOSITORY https://github.com/grpc/grpc.git
-  GIT_TAG v1.48.0  # Choose the gRPC version you want
-)
-FetchContent_MakeAvailable(gRPC)
+# ایجاد فایل اجرایی اصلی
+add_executable(OmniServe src/main.cpp)
 
-# --- Fetch JsonCpp ---
-message(STATUS "Fetching JsonCpp...")
-FetchContent_Declare(
-  JsonCpp
-  GIT_REPOSITORY https://github.com/open-source-parsers/jsoncpp.git
-  GIT_TAG master
-)
-FetchContent_MakeAvailable(JsonCpp)
-
-# --- Create the Executable ---
-message(STATUS "Creating executable...")
-add_executable(OmniServe main.cpp)
-
-# Link the libraries
+# تنظیم کتابخانه‌های مورد نیاز برای لینک‌دهی
 target_link_libraries(OmniServe 
   PRIVATE 
-  Drogon::Drogon 
+  Drogon::Drogon
+  gRPC::grpc 
   gRPC::grpc++ 
-  JsonCpp::JsonCpp
+  protobuf::libprotobuf       # استفاده از libprotobuf به عنوان هدف
+  protobuf::libprotoc         # استفاده از libprotoc برای پروتوباف
+  JsonCpp::JsonCpp 
+  ${UUID_LIB}
 )
 
-# --- Optionally enable testing ---
-message(STATUS "Enabling testing...")
-enable_testing()
-add_subdirectory(tests)  # Uncomment if you have a tests folder
-
-# --- Final message ---
+# پیام نهایی
 message(STATUS "OmniServe project setup completed successfully!")

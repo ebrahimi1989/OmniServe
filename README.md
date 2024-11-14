@@ -15,17 +15,39 @@ OmniServe is a versatile, high-performance C++ server framework designed to hand
 - **Encryption and Secure Data Transfer**: Ensures all communications are encrypted, safeguarding data in transit.
 
 ### Getting Started
+
 #### Prerequisites
 To start building and running OmniServe, you'll need to have the following tools installed:
+
 - **C++ Compiler**: Ensure compatibility with C++17 or later.
 - **Qt Framework**: Version 5.15 or above.
 - **Drogon Framework**: A C++ framework for building asynchronous HTTP applications.
 - **gRPC**: For high-performance RPC connections and bidirectional communication.
 - **vcpkg** (Package Manager): Recommended for managing dependencies and libraries.
+- **pkg-config**: Used to help locate libraries and dependencies on Linux-based systems.
+- **CMake**: Version 3.15 or above, used for building the project.
 
 #### Installation
+
 To get started with OmniServe, follow these steps:
-1. Clone the repository:
+
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/yourusername/OmniServe.git
    cd OmniServe
+
+2. . **Install required dependencies:**
+   ```bash
+   ./vcpkg install qt5-base drogon grpc libuuid
+
+3. . **Set up CMake with vcpkg toolchain:**
+   ```bash
+   cmake -DCMAKE_TOOLCHAIN_FILE=/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake .
+
+4. . **Build the project:**
+   ```bash
+   cmake --build .
+
+5. . **Run OmniServe:**
+   ```bash 
+   ./OmniServe
