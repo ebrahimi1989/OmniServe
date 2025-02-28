@@ -33,7 +33,7 @@ To get started with OmniServe, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/OmniServe.git
+   git clone https://github.com/ebrahimi1989/OmniServe.git
    cd OmniServe
 
 2. . **Install required dependencies:**
